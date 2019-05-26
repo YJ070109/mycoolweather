@@ -45,6 +45,8 @@ public class WeatherActivity extends AppCompatActivity  {
 
     private Button navButton;
 
+    private Button myButton;
+
     private TextView titleCity;
 
     private TextView titleUpdateTime;
@@ -79,6 +81,14 @@ public class WeatherActivity extends AppCompatActivity  {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         setContentView(R.layout.activity_weather);
+        Button myButton =(Button)findViewById(R.id.my_button);
+        myButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(WeatherActivity.this, PersonalActivity.class);
+                startActivity(intent);
+            }
+        });
         // 初始化各控件
         bingPicImg = (ImageView) findViewById(R.id.bing_pic_img);
         weatherLayout = (ScrollView) findViewById(R.id.weather_layout);
@@ -96,6 +106,7 @@ public class WeatherActivity extends AppCompatActivity  {
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navButton = (Button) findViewById(R.id.nav_button);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
